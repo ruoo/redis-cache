@@ -23,7 +23,10 @@ public class CacheAspect {
     RedisCacheCache redisCacheCache;
 
 
-    /** 缓存 */
+    /**
+     * 缓存.
+     * 缓存key=value+"&"+methodName+"&"+argName+"&"+argValue
+     * */
     @Around("@annotation(com.whosenet.cache.redis.annotation.Cacheable)")
     public Object cache(ProceedingJoinPoint pjp) {
         Object result=null;
@@ -64,6 +67,9 @@ public class CacheAspect {
         return null;
     }
 
+
+
+
     /**
      *  获取被拦截方法对象
      *
@@ -89,8 +95,10 @@ public class CacheAspect {
         return method;
 
     }
+
+
     /**
-     *	获取缓存的key
+     *	获取缓存的key.
      *	key 定义在注解上，支持SPEL表达式
      */
     private String parseKey(String key,Method method,Object [] args){
