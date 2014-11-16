@@ -36,16 +36,21 @@ redis-cache
     - key:缓存集合名
     - fieldKey:缓存key,支持SPEL表达式
 
+
        @Transactional
        @Cacheable(key="getAdminByName",fieldKey="#name")
        public Admin getByName(String name) {
            return adminDao.getByUsername(name);
        }
 
+
+
 * 清理缓存
     - key:缓存集合名
     - fieldKey:缓存key,支持SPEL表达式
     - allEntries:是否清除该集合下所有key的缓存(默认false)
+
+
 
        @Transactional
        @CacheEvict(key="getAdminByName",fieldKey="#admin.username")
